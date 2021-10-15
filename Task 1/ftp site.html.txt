@@ -1,0 +1,7 @@
+<html>
+	<title>Some Title</title>
+	<body>
+		Not so quick! 
+		Relax a little
+	</body>
+</html>

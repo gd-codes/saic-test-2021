@@ -1,0 +1,6 @@
+.DS_Store
+hackmeSAIC.ova
+Task 2/ipinfo/logs/*.json
+ubuntu-loading.mp4
+**/misc/**
+__pycache__

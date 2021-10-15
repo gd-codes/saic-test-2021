@@ -1,0 +1,8 @@
+Could not start the machine hackme because the following physical network interfaces were not found:
+
+wlx90f652cc543e (adapter 1)
+
+You can either change the machine's network settings or stop the machine.
+
+
+
