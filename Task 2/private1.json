@@ -1,6 +1,6 @@
 {
     "address": "192.168.1.3",
-    "timestamp": "2021-10-14T19:35:08.790572",
+    "timestamp": "2021-10-15T11:02:14.890179",
     "ports_services": [
         {
             "port": 21,
@@ -28,11 +28,11 @@
         }
     ],
     "operating_system": "MAC Address: 08:00:27:0F:7F:93 (Oracle VirtualBox virtual NIC)\nDevice type: general purpose\nRunning: Linux 3.X|4.X\nOS CPE: cpe:/o:linux:linux_kernel:3 cpe:/o:linux:linux_kernel:4\nOS details: Linux 3.2 - 4.9\nNetwork Distance: 1 hop\nService Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel\n\n",
-    "traceroute": "HOP RTT     ADDRESS\n1   0.31 ms 192.168.1.3",
+    "traceroute": "HOP RTT     ADDRESS\n1   0.47 ms 192.168.1.3",
     "geolocation": {
         "status": "fail",
         "message": "private range",
         "query": "192.168.1.3"
     },
-    "domain_whois": "% IANA WHOIS server\n% for more information on IANA, visit http://www.iana.org\n% This query returned 1 object\n\ninetnum:      192.168.0.0 - 192.168.255.255\norganisation: IANA\nstatus:       assigned\n\nremarks:      http://www.iana.org/go/rfc1918\n\nchanged:      1994-03\nsource:       IANA\n\n"
+    "domain_whois": []
 }

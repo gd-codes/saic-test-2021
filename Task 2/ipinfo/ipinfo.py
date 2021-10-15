@@ -7,6 +7,8 @@ import os
 import argparse
 import warnings
 
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
 parser = argparse.ArgumentParser()
 parser.add_argument('ip', help="IP address to scan")
 parser.add_argument("--udp", help="""Scan UDP ports & services in addition to TCP.
@@ -90,7 +92,23 @@ def get_whois():
     executed = subprocess.run(cmd, stdout=subprocess.PIPE, 
                                    stderr=subprocess.PIPE)
     res = executed.stdout.decode('utf-8')
-    data['domain_whois'] = res
+    data['domain_whois'] = parse_whois(res)
+
+
+def parse_whois(text):
+    c, d = [], {}
+    for l in text.split('\n'):
+        if l.strip():
+            if l[0]=='%' or l[0]=='#':
+                if  d : c.append(d)
+                d = {}
+                continue
+            k = l.split(':')
+            if k[0] in d:
+                d[k[0]] += ''.join([x.strip() for x in k[1:]]) + '\n'
+            else :
+                d[k[0]] = ''.join([x.strip() for x in k[1:]]) + '\n'
+    return c
 
 
 def can_get_os():
@@ -131,4 +149,7 @@ if __name__ == '__main__':
         json.dump(data, of, indent=4)
 
     print("Saved", os.path.abspath(args.outfile.name))
+    with open('./.RECENT', 'a') as recentfile:
+        recentfile.write(os.path.abspath(args.outfile.name))
+        recentfile.write('\n')
 
