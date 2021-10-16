@@ -1,0 +1,8 @@
+
+# My entries
+.DS_Store
+**/misc/**
+
+# Everything from .gitignore s of both sites
+.vscode/
+
