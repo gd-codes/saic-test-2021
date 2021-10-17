@@ -1,3 +1,5 @@
+"""Script to scan the given ip address for open ports, services, OS, 
+geolocation, traceruote and domain info """
 
 import datetime
 import subprocess
@@ -7,7 +9,11 @@ import os
 import argparse
 import warnings
 
+# Ensure that the .RECENT and logs/ locations are in the same folder as this script
+# They are created at cwd
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
+# Argument parser to make it more like a command when interacted with from shell
 
 parser = argparse.ArgumentParser()
 parser.add_argument('ip', help="IP address to scan")
@@ -18,9 +24,15 @@ Default is {cwd}/logs/{timestamp}.json""",  metavar="PATH", type=argparse.FileTy
 args = parser.parse_args()
 
 
+# `Data` is the log that will be generated in JSON format
 data = {"address" : args.ip,
         "timestamp" : datetime.datetime.now().isoformat()}
 
+
+# All the `get_*()` functions call shell commands and collect their output
+# The `parse_*()` functions extract the main details from the text
+# and convert it to JSON-convertible format
+# Do NOT use `shell=True` as argument, it mught make the commands fail
 
 def get_ports_os():
     global args, data
@@ -114,9 +126,9 @@ def parse_whois(text):
 def can_get_os():
     cmd = ['nmap', '-O', args.ip]
     try :
-        executed = subprocess.run(cmd, stdout=subprocess.PIPE, timeout=1)
+        executed = subprocess.run(cmd, stdout=subprocess.PIPE, timeout=10)
     except subprocess.TimeoutExpired:
-        return False
+        return True
     if 'requires root privileges' in executed.stdout.decode('utf-8'):
         return False
     else :
@@ -126,8 +138,11 @@ def can_get_os():
 
 if __name__ == '__main__':
 
-    print("Starting at", data['timestamp'])
-    if not can_get_os():
+    # Run the program
+
+    print("Starting at", datetime.datetime.now().isoformat(' '))
+    print("Target :", args.ip)
+    if can_get_os():
         print("Attempting to find OS information...")
     else :
         warnings.warn("Root privileges required. Skipping Port scan & OS info.",
@@ -138,6 +153,8 @@ if __name__ == '__main__':
     get_geoloc()
     print("Performing whois lookup...")
     get_whois()
+    
+    # Save the log file
 
     if args.outfile is None:
         logdate = datetime.datetime.now().isoformat().replace(':','')

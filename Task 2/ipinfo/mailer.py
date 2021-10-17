@@ -9,6 +9,8 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email.utils import formatdate
 
+# Ensure that the .RECENT and logs/ locations are in the same folder as this script
+# They are created at cwd by ipinfo.py
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 

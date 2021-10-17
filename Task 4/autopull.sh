@@ -7,6 +7,7 @@ REMOTE_NAME='origin'
 BRANCH_CHECK='master'
 BASE_BRANCH='master'
 
+export TERM='xterm-256color'
 log_info() { echo "$(tput setaf 2)[INFO]$(tput sgr0) $@"; }
 log_err() { echo "$(tput setaf 1)[ERROR]$(tput sgr0) $@"; }
 
