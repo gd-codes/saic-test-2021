@@ -18,15 +18,15 @@ I couldn't finish this task fully, here's a detailed explanation of what I tried
 8. I used `curl -T` to transfer a random text file, and it actually uploaded it ! (permanently, this stayed even after rebooting the VM). *This could be a potential vulnerability.* I could upload a script that lists files outside these folders and sends me whatever info i need, although i can't execute it yet using ftp (i'm not sure how otherwise, if i have that much access, i might be able to directly get that info).
 9. I didn't try much with SSH. I got the public key fingerprints of the machine from nmap's output, but by now I started focusing more on the other questions. I tried a few random username/password guesses including hackme, saic, etc, *just in case* XD, but if authentication is with a private key string from `ssh-keygen` then these won't work anyway.
 10. Later I came back to this task and tried some [nmap scripts](https://nmap.org/nsedoc/categories/safe.html), the *http-\** ones to try to check for git repos, list (ls) files without returning index.html, etc. These didn't show anything useful.
-11. I started attempting (unsuccessfully) to spoof my IP to its own address (192.168.1.3) to get in (using `nmap -S` and adding `X-Forwarded-For:` HTTP header), but didn't actually complete it. I could set up port forwarding on my router to allow TCP connections to happen with this. Although i'm not sure if IP spoofing will get me anything new, more info might only be limited to localhost (127.0.0.1) which is within the VM. I also know the least about this.
+11. I also thought of trying to spoof my IP (using `nmap -S` and adding `X-Forwarded-For:` HTTP header), but didn't actually complete it. I could set up port forwarding on my router to allow TCP connections to complete with this. But I'm not sure if  this will be useful anyway, if I can't substitute it with 127.0.0.1. And I'm already on the local/private network and other IPs in this subnet will probably also have same level of access.
 
 ### Scripts & Tools
 
-- Primarily, the command that was most useful here was `nmap`. This is also the only one I had to install (others are usually present by default, like curl, ping, arp, etc). It can be downloaded using `brew` on MacOS or `apt-get` on *nix, other options on the [website](https://nmap.org/download.html).
+- Primarily, the command that was most useful here was `nmap`. This is also the only one I had to install (others are usually present by default, like curl, ping, arp, etc). It can be downloaded using `brew` on MacOS or `apt-get` on *nix, from binaries on Windows, other options on the [website](https://nmap.org/download.html).
 - I didn't write any other programs for this (other than the one in Task 2)
 
 ### What I learnt
-I think most of the things  came across are listed in the long description above, many of them were new to me.
+I think most of the things I found out are listed in the long description above, many of them were new to me.
 `Nmap` was the most valuable finding - this has a huge number of features to extract info from IP packets in all sorts of ways.
 
 Other than that, I also found out details about a lot more commands like

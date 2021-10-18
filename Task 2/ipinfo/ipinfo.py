@@ -9,9 +9,12 @@ import os
 import argparse
 import warnings
 
+from mailer import send
+
 # Ensure that the .RECENT and logs/ locations are in the same folder as this script
 # They are created at cwd
-os.chdir(os.path.dirname(os.path.abspath(__file__)))
+# os.chdir(os.path.dirname(os.path.abspath(__file__)))
+assert os.path.isfile('./.RECENT'), "Please `cd` into this script's directory first"
 
 # Argument parser to make it more like a command when interacted with from shell
 
@@ -21,6 +24,8 @@ parser.add_argument("--udp", help="""Scan UDP ports & services in addition to TC
 May increase execution time > 10x""", action='store_true')
 parser.add_argument("-o", "--outfile", help="""Write output log to specified file
 Default is {cwd}/logs/{timestamp}.json""",  metavar="PATH", type=argparse.FileType('w'))
+parser.add_argument('--email', nargs='*', type=str, default=[], metavar='ADDRESSES',
+help="Email this log to recipients immediately after generating.")
 args = parser.parse_args()
 
 
@@ -170,3 +175,13 @@ if __name__ == '__main__':
         recentfile.write(os.path.abspath(args.outfile.name))
         recentfile.write('\n')
 
+    # Try emailing
+
+    summary = f""" Log Summary -
+Address: {args.ip}
+Open ports: {len(data['ports_services'])}
+Country: {data['geolocation']['country'] 
+if data['geolocation']['status']=='success' else 'Unknown'}"""
+
+    if args.email :
+        send(args.email, summary, os.path.abspath(args.outfile.name))
