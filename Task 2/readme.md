@@ -48,7 +48,6 @@ The log file is in JSON, with the following structure :
 ### Demo
 You can look at `demo.mp4` to see it in action. `private1.json` and `public1.json` are examples of the output when i ran this on my ip address (even without firewalls, i found out my laptop blocks all of nmap's queries) and the VM from task 1.
 
-For the purpose of this, I created a new temporary/dummy gmail account `bluemarmalade9000@gmail.com` which i used here.
 
 ### What I learnt
 - More about port scanning and `nmap`

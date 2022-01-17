@@ -2,7 +2,7 @@
 
 # Change these variables to required values
 # ENSURE that the remote & branch names are correct ! (no typos)
-LOCAL_REPO='/Users/gautamd/School/IIT-Mandi/clubs/SAIC test/Task 4/misc'
+LOCAL_REPO='./misc'
 REMOTE_NAME='origin'
 BRANCH_CHECK='master'
 BASE_BRANCH='master'
